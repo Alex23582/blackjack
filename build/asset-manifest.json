@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.b719a4a6.css",
-    "main.js": "/static/js/main.8d5366f7.js",
-    "static/js/592.609fde15.chunk.js": "/static/js/592.609fde15.chunk.js",
-    "static/media/Inter.ttf": "/static/media/Inter.853e01975d2783d9fa29.ttf",
-    "static/media/spade.svg": "/static/media/spade.4cfac5ecc0b1efb8951b478671ee9b4d.svg",
-    "index.html": "/index.html",
-    "static/media/heart.svg": "/static/media/heart.b1944ef2ff78c72ea97fd25ff9203a36.svg",
-    "static/media/club.svg": "/static/media/club.284fa21e6e3b3912f0b3eec07e032c18.svg",
-    "static/media/diamond.svg": "/static/media/diamond.150a35ffb7182a8e9c5b74121494d278.svg",
-    "main.b719a4a6.css.map": "/static/css/main.b719a4a6.css.map",
-    "main.8d5366f7.js.map": "/static/js/main.8d5366f7.js.map",
-    "592.609fde15.chunk.js.map": "/static/js/592.609fde15.chunk.js.map"
+    "main.css": "https://alex23582.github.io/blackjack/build/static/css/main.50c0e4b5.css",
+    "main.js": "https://alex23582.github.io/blackjack/build/static/js/main.1df73dbe.js",
+    "static/js/592.609fde15.chunk.js": "https://alex23582.github.io/blackjack/build/static/js/592.609fde15.chunk.js",
+    "static/media/Inter.ttf": "https://alex23582.github.io/blackjack/build/static/media/Inter.853e01975d2783d9fa29.ttf",
+    "static/media/spade.svg": "https://alex23582.github.io/blackjack/build/static/media/spade.4cfac5ecc0b1efb8951b478671ee9b4d.svg",
+    "index.html": "https://alex23582.github.io/blackjack/build/index.html",
+    "static/media/heart.svg": "https://alex23582.github.io/blackjack/build/static/media/heart.b1944ef2ff78c72ea97fd25ff9203a36.svg",
+    "static/media/club.svg": "https://alex23582.github.io/blackjack/build/static/media/club.284fa21e6e3b3912f0b3eec07e032c18.svg",
+    "static/media/diamond.svg": "https://alex23582.github.io/blackjack/build/static/media/diamond.150a35ffb7182a8e9c5b74121494d278.svg",
+    "main.50c0e4b5.css.map": "https://alex23582.github.io/blackjack/build/static/css/main.50c0e4b5.css.map",
+    "main.1df73dbe.js.map": "https://alex23582.github.io/blackjack/build/static/js/main.1df73dbe.js.map",
+    "592.609fde15.chunk.js.map": "https://alex23582.github.io/blackjack/build/static/js/592.609fde15.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.b719a4a6.css",
-    "static/js/main.8d5366f7.js"
+    "static/css/main.50c0e4b5.css",
+    "static/js/main.1df73dbe.js"
   ]
 }
