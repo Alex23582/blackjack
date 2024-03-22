@@ -1,0 +1,129 @@
+import React, { useEffect, useRef, useState } from 'react'
+import Card from './Card';
+import TextCard from './TextCard';
+import BetSelector from './BetSelector';
+import styles from './GameTable.module.css'
+
+function getRandomCard() {
+    const types = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
+    
+    return {
+        text: types[Math.floor(Math.random() * types.length)],
+        type: Math.floor(Math.random() * 4)
+    }
+}
+
+/*
+PLAYER = 0
+DEALER = 1
+ */
+
+function GameTable() {
+    const [gameStarted, setgameStarted] = useState(false)
+    const [playerCards, setplayerCards] = useState([])
+    const [dealerCards, setdealerCards] = useState([])
+    const [deckLocation, setdeckLocation] = useState()
+    const [playerCardsLocation, setplayerCardsLocation] = useState()
+    const [dealerCardsLocation, setdealerCardsLocation] = useState()
+    const [currentMovingCard, setcurrentMovingCard] = useState()
+    const [hiddenMovingCardActive, sethiddenMovingCardActive] = useState(false)
+    const [currentMovingReceiver, setcurrentMovingReceiver] = useState(0)
+    const [movingCardCounterTEMP, setmovingCardCounterTEMP] = useState(0)
+    const deckCard = useRef()
+    const dealerCardsContainer = useRef()
+    const playerCardsContainer = useRef()
+
+    function startGame() {
+        setgameStarted(true)
+        setcurrentMovingCard(getRandomCard())
+    }
+
+    function updateLocations() {
+        setdeckLocation(deckCard.current.getBoundingClientRect())
+        setplayerCardsLocation(playerCardsContainer.current.getBoundingClientRect())
+        setdealerCardsLocation(dealerCardsContainer.current.getBoundingClientRect())
+    }
+
+    function animationFinish() {
+        if (currentMovingReceiver == 0) {
+            setplayerCards([...playerCards, currentMovingCard])
+        }
+        if (currentMovingReceiver == 1) {
+            setdealerCards([currentMovingCard, ...dealerCards])
+        }
+        setmovingCardCounterTEMP((old) => old + 1)
+        setcurrentMovingCard(null)
+    }
+
+    function addCard(receiver, hidden = false) {
+        setcurrentMovingReceiver(receiver)
+        let newCard = getRandomCard()
+        newCard.hidden = hidden
+        setcurrentMovingCard(newCard)
+    }
+
+    function gameLoop() {
+        if (playerCards.length == 1 && dealerCards.length == 0) {
+            addCard(1)
+        }
+        if(playerCards.length == 1 && dealerCards.length == 1){
+            addCard(0)
+        }
+        if(playerCards.length == 2 && dealerCards.length == 1){
+            sethiddenMovingCardActive(true)
+        }
+    }
+    
+    function hiddenCardAnimationFinish(){
+        sethiddenMovingCardActive(false)
+        let card = getRandomCard()
+        card.hidden = true;
+        setdealerCards([...dealerCards, card])
+    }
+
+    useEffect(() => {
+        gameLoop()
+    }, [playerCards, dealerCards])
+
+
+    useEffect(() => {
+        updateLocations()
+    }, [currentMovingCard])
+
+
+    return (
+        <>
+            {currentMovingCard && <Card key={movingCardCounterTEMP} topAlign={currentMovingReceiver == 1} onAnimationFinish={animationFinish} animateFrom={deckLocation} animateTo={currentMovingReceiver == 0 ? playerCardsLocation : dealerCardsLocation} text={currentMovingCard.text} type={currentMovingCard.type} />}
+            {hiddenMovingCardActive && <TextCard text="CARD" onAnimationFinish={hiddenCardAnimationFinish} animateFrom={deckLocation} animateTo={dealerCardsLocation}  />}
+            <div className={styles.toprow}>
+                <div ref={dealerCardsContainer} style={currentMovingCard && currentMovingReceiver == 1 && playerCards.length > 0 ? {
+                    transform: `translateX(${(deckLocation.width / 2) + 10}px)`
+                } : hiddenMovingCardActive ? {
+                    transform: `translateX(${-(deckLocation.width / 2) - 10 }px)`
+                } : {
+                    transition: "0s"
+                }} className={styles.dealercards}>
+                    {gameStarted && dealerCards.map((card, i) => {
+                        if(card.hidden){
+                            return <TextCard key={i} text="CARD" />
+                        }
+                        return <Card key={i} text={card.text} type={card.type} />
+                    })}
+                </div>
+                <TextCard className={styles.deckcard} ref={deckCard} text="DECK" />
+            </div>
+            <div className={styles.bottomrow}>
+                <div ref={playerCardsContainer} key={movingCardCounterTEMP + "a"} style={currentMovingCard && currentMovingReceiver == 0 && playerCards.length > 0 ? {
+                    transform: `translateX(${(deckLocation.width / 2) + 10}px)`
+                } : {}} className={styles.dealercards}>
+                    {gameStarted && playerCards.map((card, i) => {
+                        return <Card key={i} text={card.text} type={card.type} />
+                    })}
+                </div>
+                {!gameStarted && <BetSelector startGame={startGame} />}
+            </div>
+        </>
+    )
+}
+
+export default GameTable

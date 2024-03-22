@@ -1,0 +1,19 @@
+.main{
+    width: 180px;
+    background-color: #484848;
+    border: none;
+    outline: none;
+    color: white;
+    font-weight: 600;
+    padding: 12px 0;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: 0.1s linear;
+    user-select: none;
+}
+
+.main:hover{
+    background-color: #353535;
+}

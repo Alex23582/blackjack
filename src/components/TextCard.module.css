@@ -1,0 +1,25 @@
+.main{
+    width: 135px;
+    height: 188px;
+    background-color: #484848;
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.25);
+    padding: 13px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+}
+
+.main p{
+    transform: rotate(270deg);
+    margin: 0;
+    font-weight: 900;
+    font-size: 3rem;
+    color: #626262;
+    user-select: none;
+}
+
+.absoultemain{
+    position: absolute;
+}
